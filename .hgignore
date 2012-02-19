@@ -1,6 +1,5 @@
 syntax: glob
-temp/*
-couchdb/*
-crosslight/*
-nodejs/*
-
+temp
+couchdb
+crosslight
+nodejs
