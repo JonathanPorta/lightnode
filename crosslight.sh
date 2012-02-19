@@ -115,7 +115,7 @@ echo -n "Installing scripts..."
 echo "Done!"
 
 #Configure permissions
-echo "Configuring permissions..."
+echo -n "Configuring permissions..."
 	sudo chown -R $USERNAME:$USERNAME $INSTALLDIR
 	sudo chmod -R 755 $INSTALLDIR
 echo "Done!"

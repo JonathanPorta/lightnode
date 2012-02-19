@@ -25,14 +25,14 @@ echo "Must be root to remove clean temp directory: $TEMPDIR"
 	echo "Done!"
 
 #Install Dependencies
-echo -n "Installing yum dependencies..."
+echo "Installing yum dependencies:"
 	$DEPS
-echo "Done!"
+echo "Yum dependencies installed."
 
 #Build Crosslight
-echo -n "Installing Crosslight..."
+echo -n "Installing Crosslight:"
 	$CROSSLIGHT
-echo "Done!"
+echo "Crosslight installed."
 
 ##Build CouchDB
 #echo -n "Installing CouchDB..."
