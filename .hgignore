@@ -1,5 +1,5 @@
-syntax: glob
-temp
-couchdb
-crosslight
-nodejs
+syntax: regexp
+^temp/*
+^couchdb/*
+^crosslight/*
+^nodejs/*
