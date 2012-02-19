@@ -30,7 +30,7 @@ echo "Installing yum dependencies:"
 echo "Yum dependencies installed."
 
 #Build Crosslight
-echo -n "Installing Crosslight:"
+echo "Installing Crosslight:"
 	$CROSSLIGHT
 echo "Crosslight installed."
 
