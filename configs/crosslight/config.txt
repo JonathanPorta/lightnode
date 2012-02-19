@@ -1,0 +1,13 @@
+Global configuration of lighttpd is in lighttpd.conf including hostname, port,
+doc-root, pid-file, and included extensions. lighttpd.conf starts by calling 
+lighttpd.conf.local, which is automatically generated and should only have a
+single directive specifying the root directory to use. (In the future, we might
+use this to chroot the app.)
+
+lighttpd.mimetype.conf is so that I don't pollute the main config file with all
+the mimetype decls. lighttpd.fastcgi.conf is to configure FastCGI and CHI opts.
+lighttpd.rewrite.conf is for any rewrite rules (currently for CodeIgniter).
+lighttpd.ssl.conf is for ssl engine configuration, but is not enabled by default.
+Use ./etc/configssl.sh to generate keys and enable ssl. ./etc/lighttpd.debug.conf
+has some nice options for debugging mod_rewrite and others, but is disabled by
+default.
