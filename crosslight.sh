@@ -34,14 +34,6 @@ LOGSPACER="---------------------------------------------------------------------
 
 CONFIGPARAMS="--with-openssl --with-openssl-libs=/usr/lib --sbindir=$INSTALLDIR/bin/ --libdir=$INSTALLDIR/bin/lib/"
 
-#Clear Temp Directory
-echo "Must be root to remove clean temp directory: $TEMPDIR"
-#	su -c "echo -n 'Removing and recreating temp directory: $TEMPDIR...'    ;    rm -rf '$TEMPDIR'"
-	sudo echo -n "Removing and recreating temp and install directories..."
-	sudo rm -rf $TEMPDIR $INSTALLDIR
-	mkdir -p $TEMPDIR $LOGDIR $INSTALLDIR
-echo "Done!"
-
 #Write error logs and mkdir install directory.
 mkdir -p $INSTALLDIR "$INSTALLDIR/bin/lib" "$INSTALLDIR/etc" $INSTALLCONFIGDIR
 touch $ERRORLOG $BUILDLOG
@@ -80,7 +72,6 @@ echo "Done!"
 
 #Cleanup and build directory tree
 echo -n "Cleaning up install..."
-
 	#Clean up everything we don't need, but can't turn off in the ./configure scripts.
 	BIN="$INSTALLDIR/bin"
 	SBIN="$INSTALLDIR/sbin"
@@ -124,7 +115,7 @@ echo -n "Installing scripts..."
 echo "Done!"
 
 #Configure permissions
-echo "Configuring permissions."
+echo "Configuring permissions..."
 	sudo chown -R $USERNAME:$USERNAME $INSTALLDIR
 	sudo chmod -R 755 $INSTALLDIR
-echo "Permissions configured."
+echo "Done!"
