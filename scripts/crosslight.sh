@@ -8,6 +8,7 @@ ROOTDIR="`pwd`"
 
 PORT=3000
 ALL=
+LOGS=( "big-static.log" "big-static.error.log" "big-jefri.log" "big-jefri.error.log" "big-scheduler.log" "big-scheduler.error.log" "big-reports.log" "big-reports.error.log" "big-stream.log" "big-stream.error.log" "big-legacy.log" "big-legacy.error.log" )
 
 ACT=$1
 shift
@@ -44,14 +45,25 @@ findport()
 
 case "$ACT" in
 	start)
+		#Make sure our logs are good.
+		for i in "${LOGS[@]}"
+		do
+			touch $ROOTDIR/var/log/$i
+			chown crosslight:crosslight $ROOTDIR/var/log/$i
+			chmod 640 $ROOTDIR/var/log/$i
+		done
+
 		if [ -e $ROOTDIR/var/tmp/lighttpd.pid ]
-			then echo "Can not start CrossLight it is already running"
+		then
+				echo "CrossLight is already running"
+				$ROOTDIR/crosslight.sh stop
+				$ROOTDIR/crosslight.sh start
 		else
-			findport
-			echo "rootdir = \"$ROOTDIR\"" > $ROOTDIR/etc/lighttpd.conf.local
-			echo "server.port = $PORT" >> $ROOTDIR/etc/lighttpd.conf.local
+#			findport
+#			echo "rootdir = \"$ROOTDIR\"" > $ROOTDIR/etc/lighttpd.conf.local
+#			echo "server.port = $PORT" >> $ROOTDIR/etc/lighttpd.conf.local
 			$ROOTDIR/bin/lighttpd -f $ROOTDIR/etc/lighttpd.conf -m ./bin/lib/
-			echo "CrossLight started at localhost:$PORT"
+			echo "CrossLight started"
 		fi
 	;;
 
@@ -65,14 +77,14 @@ case "$ACT" in
 				echo "CrossLight has been stopped"
 			fi
 			else echo "CrossLight not currently running"
-			if [ "$ALL" = "ALL" ]
-			then
-				killall lighttpd
-				echo "Force-killed all lighttpds."
-				echo "If a different lighttpd was open, its pid did not get cleaned up."
-				echo "If you run a different crosslight install, and get 'already running'"
-				echo "you will need to run ./crosslight.sh stop or ./crosslight.sh restart."
-			fi
+#			if [ "$ALL" = "ALL" ]
+#			then
+#				killall lighttpd
+#				echo "Force-killed all lighttpds."
+#				echo "If a different lighttpd was open, its pid did not get cleaned up."
+#				echo "If you run a different crosslight install, and get 'already running'"
+#				echo "you will need to run ./crosslight.sh stop or ./crosslight.sh restart."
+#			fi
 		fi
 	;;
 
@@ -87,10 +99,10 @@ case "$ACT" in
 		if [ -e $ROOTDIR/var/tmp/lighttpd.pid ]
 			then echo "CrossLight is running, stop first before running in debug mode"
 		else
-			findport
-			echo "rootdir = \"$ROOTDIR\"" >| $ROOTDIR/etc/lighttpd.conf.local
-			echo "include \"lighttpd.debug.conf\"" >> $ROOTDIR/etc/lighttpd.conf.local
-			echo "server.port = $PORT" >> $ROOTDIR/etc/lighttpd.conf.local
+#			findport
+#			echo "rootdir = \"$ROOTDIR\"" >| $ROOTDIR/etc/lighttpd.conf.local
+#			echo "include \"lighttpd.debug.conf\"" >> $ROOTDIR/etc/lighttpd.conf.local
+#			echo "server.port = $PORT" >> $ROOTDIR/etc/lighttpd.conf.local
 			echo "CrossLight debugging at localhost:$PORT"
 			$ROOTDIR/bin/lighttpd -D -f $ROOTDIR/etc/lighttpd.conf -m ./bin/lib/
 		fi

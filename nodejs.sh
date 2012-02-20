@@ -40,16 +40,9 @@ echo -n "Checking out tag $REPOTAG..."
 	git checkout $REPOTAG > /dev/null 2>&1
 echo "Done!"
 
-##Bootstrap gets us ready to run...err...ready to...Relax!
-#echo -n "Bootstrapping $APPNAME..."
-#	./bootstrap >> $BUILDLOG 2>>$ERRORLOG
-#	echo $LOGSPACER >> $BUILDLOG
-#	echo $LOGSPACER >> $ERRORLOG
-#echo "Done!"
-
 #Configure the makefile
 echo -n "Configuring $APPNAME to build..."
-	./configure $CONFIGPARAMS --prefix=$INSTALLDIR >> $BUILDLOG 2>>$ERRORLOG
+	./configure --enable-static --prefix=$INSTALLDIR $CONFIGPARAMS >> $BUILDLOG 2>>$ERRORLOG
 	echo $LOGSPACER >> $BUILDLOG
 	echo $LOGSPACER >> $ERRORLOG
 echo "Done!"
@@ -60,12 +53,47 @@ echo -n "Building $APPNAME..."
 echo "Done!"
 
 #Now, we must install.
-#echo "Must be root to install!"
-#	su -c "
-	echo -n "Installing $APPNAME..."    ;    make install >> $BUILDLOG 2>>$ERRORLOG    ;    echo 'Done!'
-#	"
+echo -n "Installing $APPNAME..."
+	make install >> $BUILDLOG 2>>$ERRORLOG
 	echo $LOGSPACER >> $BUILDLOG
 	echo $LOGSPACER >> $ERRORLOG
+echo "Done!"
 
+#Configure user and group permissions
+echo "Configuring user and group."
+	#Make sure we have a groupls -l
+	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
+		echo -n "Creating group $USERNAME..."
+			sudo groupadd $USERNAME
+		echo "Done!"
+	fi
+
+	#Make sure we have a user
+	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
+		echo -n "Creating user account $USERNAME..."
+			sudo useradd --system -g $USERNAME --home $INSTALLDIR/$RELHOME --shell /sbin/nologin $USERNAME
+		echo "Done!"
+	fi
+echo "User and group configuration complete!"
+
+##Install config
+#echo -n "Installing config..."
+#	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
+#	#Set Crosslights root dir, username and groupname
+#	echo "rootdir='$INSTALLDIR'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
+#	echo "server.username='$USERNAME'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
+#	echo "server.groupname='$USERNAME'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
+#echo "Done!"
+
+##Install scripts
+#echo -n "Installing scripts..."
+#	cp "$SRCSCRIPTDIR/$APPNAME.sh" "$INSTALLSCRIPTDIR/"
+#echo "Done!"
+
+#Configure permissions
+echo -n "Configuring permissions..."
+	sudo chown -R $USERNAME:$USERNAME $INSTALLDIR
+	sudo chmod -R 755 $INSTALLDIR
+echo "Done!"
 #Return to root directory.  Leave things where they were when we arrived.
 cd $ROOT
