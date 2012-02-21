@@ -27,9 +27,15 @@ BUILDLOG="$LOGDIR/build-$APPNAME"
 SRCDIR="$TEMPDIR/$APPNAME"
 SRCCONFIGDIR="$ROOT/configs/$APPNAME"
 SRCSCRIPTDIR="$ROOT/scripts"
-INSTALLDIR="$ROOT/$APPNAME"
-INSTALLCONFIGDIR="$ROOT/$APPNAME/etc"
-INSTALLSCRIPTDIR="$ROOT/$APPNAME"
+
+INSTALLDIR="/home/$APPNAME"
+INSTALLCONFIGDIR="/home/$APPNAME/etc"
+INSTALLSCRIPTDIR="/home/$APPNAME"
+
+#INSTALLDIR="$ROOT/$APPNAME"
+#INSTALLCONFIGDIR="$ROOT/$APPNAME/etc"
+#INSTALLSCRIPTDIR="$ROOT/$APPNAME"
+
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
 
 CONFIGPARAMS="--with-openssl --with-openssl-libs=/usr/lib --sbindir=$INSTALLDIR/bin/ --libdir=$INSTALLDIR/bin/lib/"
@@ -39,7 +45,7 @@ mkdir -p $INSTALLDIR "$INSTALLDIR/bin/lib" "$INSTALLDIR/etc" $INSTALLCONFIGDIR
 touch $ERRORLOG $BUILDLOG
 
 echo -n "Downloading $APPNAME..."
-	wget -O "$TEMPDIR/$SRCTAR"  "$SRCURL/$SRCTAR" 1>$BUILDLOG 2>$ERRORLOG.
+	wget -O "$TEMPDIR/$SRCTAR"  "$SRCURL/$SRCTAR" 1>$BUILDLOG 2>$ERRORLOG
 echo "Done!"
 
 echo -n "Preparing $APPNAME source..."
@@ -88,14 +94,14 @@ echo "Configuring user and group."
 	#Make sure we have a groupls -l
 	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
 		echo -n "Creating group $USERNAME..."
-			sudo groupadd $USERNAME
+			groupadd $USERNAME
 		echo "Done!"
 	fi
 
 	#Make sure we have a user
 	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
 		echo -n "Creating user account $USERNAME..."
-			sudo useradd --system -g $USERNAME --home $INSTALLDIR/$RELHOME --shell /sbin/nologin $USERNAME
+			useradd -g $USERNAME --home $INSTALLDIR --shell /sbin/nologin $USERNAME
 		echo "Done!"
 	fi
 echo "User and group configuration complete!"
@@ -116,6 +122,6 @@ echo "Done!"
 
 #Configure permissions
 echo -n "Configuring permissions..."
-	sudo chown -R $USERNAME:$USERNAME $INSTALLDIR
-	sudo chmod -R 755 $INSTALLDIR
+	chown -R $USERNAME:$USERNAME $INSTALLDIR
+	chmod -R 640 $INSTALLDIR
 echo "Done!"

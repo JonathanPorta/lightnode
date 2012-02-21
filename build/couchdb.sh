@@ -1,12 +1,13 @@
 #!/bin/bash
 
-#Builds and installs the version of Node.js at the specified tag.
+#Builds and installs the version of CouchDB at the specified tag.
 
 #Specific to App
-APPNAME="nodejs"
-REPO="https://github.com/joyent/node.git"
-REPOTAG="v0.6.11"
-CONFIGPARAMS=""
+APPNAME="couchdb"
+USERNAME="couchdb"
+REPO="http://git-wip-us.apache.org/repos/asf/couchdb.git"
+REPOTAG="1.1.1"
+CONFIGPARAMS="--with-erlang=/usr/lib64/erlang/usr/include/"
 
 #Abort on Error
 set -e
@@ -19,8 +20,11 @@ ERRORLOG="$LOGDIR/error-$APPNAME"
 BUILDLOG="$LOGDIR/build-$APPNAME"
 SRCDIR="$TEMPDIR/$APPNAME"
 SRCCONFIGDIR="$ROOT/configs/$APPNAME"
-INSTALLDIR="$ROOT/$APPNAME"
-INSTALLCONFIGDIR="$ROOT/$APPNAME"
+
+INSTALLDIR="/home/$APPNAME"
+INSTALLCONFIGDIR="/home/$APPNAME/etc"
+INSTALLSCRIPTDIR="/home/$APPNAME"
+
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
 
 #Write error logs and mkdir install directory.
@@ -40,9 +44,16 @@ echo -n "Checking out tag $REPOTAG..."
 	git checkout $REPOTAG > /dev/null 2>&1
 echo "Done!"
 
+#Bootstrap gets us ready to run...err...ready to...Relax!
+echo -n "Bootstrapping $APPNAME..."
+	./bootstrap >> $BUILDLOG 2>>$ERRORLOG
+	echo $LOGSPACER >> $BUILDLOG
+	echo $LOGSPACER >> $ERRORLOG
+echo "Done!"
+
 #Configure the makefile
 echo -n "Configuring $APPNAME to build..."
-	./configure --enable-static --prefix=$INSTALLDIR $CONFIGPARAMS >> $BUILDLOG 2>>$ERRORLOG
+	./configure $CONFIGPARAMS --prefix=$INSTALLDIR >> $BUILDLOG 2>>$ERRORLOG
 	echo $LOGSPACER >> $BUILDLOG
 	echo $LOGSPACER >> $ERRORLOG
 echo "Done!"
@@ -64,14 +75,14 @@ echo "Configuring user and group."
 	#Make sure we have a groupls -l
 	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
 		echo -n "Creating group $USERNAME..."
-			sudo groupadd $USERNAME
+			groupadd $USERNAME
 		echo "Done!"
 	fi
 
 	#Make sure we have a user
 	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
 		echo -n "Creating user account $USERNAME..."
-			sudo useradd --system -g $USERNAME --home $INSTALLDIR/$RELHOME --shell /sbin/nologin $USERNAME
+			useradd -g $USERNAME --home $INSTALLDIR $USERNAME
 		echo "Done!"
 	fi
 echo "User and group configuration complete!"
@@ -92,8 +103,8 @@ echo "User and group configuration complete!"
 
 #Configure permissions
 echo -n "Configuring permissions..."
-	sudo chown -R $USERNAME:$USERNAME $INSTALLDIR
-	sudo chmod -R 755 $INSTALLDIR
+	chown -R $USERNAME:$USERNAME $INSTALLDIR
+	chmod -R 754 $INSTALLDIR
 echo "Done!"
 #Return to root directory.  Leave things where they were when we arrived.
 cd $ROOT

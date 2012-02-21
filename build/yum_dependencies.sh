@@ -20,15 +20,15 @@ ERRORLOG="$LOGDIR/error-$APPNAME"
 
 #General Development Tools
 echo "Installing Development Dependencies"
-	sudo yum -y groupinstall 'Development Tools' 2>>$ERRORLOG
+	yum -y groupinstall 'Development Tools' 2>>$ERRORLOG
 
 #Crosslight
 echo "Installing Crosslight Dependencies"
-	sudo yum -y install pcre-devel zlib-devel bzip2-devel libxml2-devel openssl-devel libcurl-devel libpng-devel libjpeg-devel libtidy-devel 2>>$ERRORLOG
+	yum -y install pcre-devel zlib-devel bzip2-devel libxml2-devel openssl-devel libcurl-devel libpng-devel libjpeg-devel libtidy-devel 2>>$ERRORLOG
 
 #CouchDB
 echo "Installing CouchDB Dependencies"
-	sudo yum -y install icu libicu-devel js js-devel erlang 2>>$ERRORLOG
+	yum -y install icu libicu-devel js js-devel erlang 2>>$ERRORLOG
 
 #Node.js
 echo "Installing Node.js Dependencies"
