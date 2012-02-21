@@ -4,13 +4,14 @@
 set -e
 
 ROOT=`pwd`
+BUILDSCRIPTS="$ROOT/build"
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
 
-DEPS="$ROOT/yum_dependencies.sh"
-CROSSLIGHT="$ROOT/crosslight.sh"
-COUCH="$ROOT/couchdb.sh"
-NODE="$ROOT/nodejs.sh"
+DEPS="$BUILDSCRIPTS/yum_dependencies.sh"
+CROSSLIGHT="$BUILDSCRIPTS/crosslight.sh"
+COUCH="$BUILDSCRIPTS/couchdb.sh"
+NODE="$BUILDSCRIPTS/nodejs.sh"
 
 
 #Need to be root

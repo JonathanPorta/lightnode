@@ -19,7 +19,7 @@ SRCTAR="$SRCPKG$SRCVER$SRCEXT"
 set -e
 
 #Generic Variables
-ROOT=`pwd`
+#ROOT=`pwd`
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
 ERRORLOG="$LOGDIR/error-$APPNAME"

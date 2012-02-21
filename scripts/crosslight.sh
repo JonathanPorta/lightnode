@@ -8,7 +8,7 @@ ROOTDIR="`pwd`"
 
 PORT=3000
 ALL=
-LOGS=( "big-static.log" "big-static.error.log" "big-jefri.log" "big-jefri.error.log" "big-scheduler.log" "big-scheduler.error.log" "big-reports.log" "big-reports.error.log" "big-stream.log" "big-stream.error.log" "big-legacy.log" "big-legacy.error.log" )
+#LOGS=( "big-static.log" "big-static.error.log" "big-jefri.log" "big-jefri.error.log" "big-scheduler.log" "big-scheduler.error.log" "big-reports.log" "big-reports.error.log" "big-stream.log" "big-stream.error.log" "big-legacy.log" "big-legacy.error.log" )
 
 ACT=$1
 shift
@@ -45,13 +45,13 @@ findport()
 
 case "$ACT" in
 	start)
-		#Make sure our logs are good.
-		for i in "${LOGS[@]}"
-		do
-			touch $ROOTDIR/var/log/$i
-			chown crosslight:crosslight $ROOTDIR/var/log/$i
-			chmod 640 $ROOTDIR/var/log/$i
-		done
+#		#Make sure our logs are good.
+#		for i in "${LOGS[@]}"
+#		do
+#			touch $ROOTDIR/var/log/$i
+#			chown crosslight:crosslight $ROOTDIR/var/log/$i
+#			chmod 640 $ROOTDIR/var/log/$i
+#		done
 
 		if [ -e $ROOTDIR/var/tmp/lighttpd.pid ]
 		then
