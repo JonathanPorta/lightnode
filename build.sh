@@ -7,6 +7,7 @@ ROOT=`pwd`
 BUILDSCRIPTS="$ROOT/build"
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
+INSTALLROOT="/home"
 
 DEPS="$BUILDSCRIPTS/yum_dependencies.sh"
 CROSSLIGHT="$BUILDSCRIPTS/crosslight.sh"
@@ -23,27 +24,27 @@ fi
 #Clear Temp Directory
 echo -n "Removing and recreating temp directory: $TEMPDIR..."
 	rm -rf $TEMPDIR
-	mkdir -p $TEMPDIR $LOGDIR
+	mkdir -p $TEMPDIR $LOGDIR $INSTALLROOT
 echo "Done!"
 
 #Install Dependencies
 echo "Installing yum dependencies:"
-	$DEPS
+	$DEPS $ROOT
 echo "Yum dependencies installed."
 
 #Build Crosslight
 echo "Installing Crosslight:"
-	$CROSSLIGHT
+	$CROSSLIGHT $ROOT $INSTALLROOT
 echo "Crosslight installed."
 
 #Build CouchDB
 echo -n "Installing CouchDB..."
-	$COUCH
+	$COUCH $ROOT $INSTALLROOT
 echo "Done!"
 
 #Build Node.js
 echo -n "Installing Node.js..."
-	$NODE
+	$NODE $ROOT $INSTALLROOT
 echo "Done!"
 
 echo "All installations complete!  Logs are viewable in $LOGDIR"

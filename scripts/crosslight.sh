@@ -24,11 +24,11 @@ usage()
 
 #Parse Arguments
 while getopts "ap:" OPT ; do
-    case $OPT in
-        h) usage; exit 1 ;;
-        p) PORT=$OPTARG ;;
-        a) ALL="ALL" ;;
-    esac
+	case $OPT in
+		h) usage; exit 1 ;;
+		p) PORT=$OPTARG ;;
+		a) ALL="ALL" ;;
+	esac
 done
 
 findport()

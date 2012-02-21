@@ -13,7 +13,7 @@ APPNAME="yum-deps"
 set -e
 
 #Generic Variables
-#ROOT=`pwd`
+ROOT=$1
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
 ERRORLOG="$LOGDIR/error-$APPNAME"

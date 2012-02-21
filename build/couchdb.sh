@@ -13,7 +13,9 @@ CONFIGPARAMS="--with-erlang=/usr/lib64/erlang/usr/include/"
 set -e
 
 #Generic Variables
-#ROOT=`pwd`
+ROOT="$1"
+INSTALLROOT="$2"
+
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
 ERRORLOG="$LOGDIR/error-$APPNAME"
@@ -21,9 +23,9 @@ BUILDLOG="$LOGDIR/build-$APPNAME"
 SRCDIR="$TEMPDIR/$APPNAME"
 SRCCONFIGDIR="$ROOT/configs/$APPNAME"
 
-INSTALLDIR="/home/$APPNAME"
-INSTALLCONFIGDIR="/home/$APPNAME/etc"
-INSTALLSCRIPTDIR="/home/$APPNAME"
+INSTALLDIR="$INSTALLROOT/$APPNAME"
+INSTALLCONFIGDIR="$INSTALLROOT/$APPNAME/etc"
+INSTALLSCRIPTDIR="$INSTALLROOT/$APPNAME"
 
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
 
