@@ -1,5 +1,2 @@
 syntax: regexp
 ^temp/*
-^couchdb/*
-^crosslight/*
-^nodejs/*
