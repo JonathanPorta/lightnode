@@ -21,10 +21,12 @@ LOGDIR="$TEMPDIR/logs"
 ERRORLOG="$LOGDIR/error-$APPNAME"
 BUILDLOG="$LOGDIR/build-$APPNAME"
 SRCDIR="$TEMPDIR/$APPNAME"
+
 SRCCONFIGDIR="$ROOT/configs/$APPNAME"
+SRCSCRIPTDIR="$ROOT/scripts/$APPNAME"
 
 INSTALLDIR="$INSTALLROOT/$APPNAME"
-INSTALLCONFIGDIR="$INSTALLROOT/$APPNAME/etc"
+INSTALLCONFIGDIR="$INSTALLROOT/$APPNAME"
 INSTALLSCRIPTDIR="$INSTALLROOT/$APPNAME"
 
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
@@ -82,24 +84,20 @@ echo "Configuring user and group."
 	fi
 echo "User and group configuration complete!"
 
-##Install config
-#echo -n "Installing config..."
-#	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
-#	#Set Crosslights root dir, username and groupname
-#	echo "rootdir='$INSTALLDIR'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
-#	echo "server.username='$USERNAME'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
-#	echo "server.groupname='$USERNAME'" >> $INSTALLCONFIGDIR/lighttpd.conf.local
-#echo "Done!"
+#Install config
+echo -n "Installing config..."
+	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
+echo "Done!"
 
-##Install scripts
-#echo -n "Installing scripts..."
-#	cp "$SRCSCRIPTDIR/$APPNAME.sh" "$INSTALLSCRIPTDIR/"
-#echo "Done!"
+#Install scripts
+echo -n "Installing scripts..."
+	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR
+echo "Done!"
 
 #Configure permissions
 echo -n "Configuring permissions..."
 	chown -R $USERNAME:$USERNAME $INSTALLDIR
-	chmod -R 754 $INSTALLDIR
+	chmod -R 774 $INSTALLDIR
 echo "Done!"
 #Return to root directory.  Leave things where they were when we arrived.
 cd $ROOT

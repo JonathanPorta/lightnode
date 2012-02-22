@@ -28,10 +28,10 @@ ERRORLOG="$LOGDIR/error-$APPNAME"
 BUILDLOG="$LOGDIR/build-$APPNAME"
 SRCDIR="$TEMPDIR/$APPNAME"
 SRCCONFIGDIR="$ROOT/configs/$APPNAME"
-SRCSCRIPTDIR="$ROOT/scripts"
+SRCSCRIPTDIR="$ROOT/scripts/$APPNAME"
 
 INSTALLDIR="$INSTALLROOT/$APPNAME"
-INSTALLCONFIGDIR="$INSTALLROOT/$APPNAME/etc"
+INSTALLCONFIGDIR="$INSTALLROOT/$APPNAME"
 INSTALLSCRIPTDIR="$INSTALLROOT/$APPNAME"
 
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
@@ -115,11 +115,12 @@ echo "Done!"
 
 #Install scripts
 echo -n "Installing scripts..."
-	cp "$SRCSCRIPTDIR/$APPNAME.sh" "$INSTALLSCRIPTDIR/"
+	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR
 echo "Done!"
 
 #Configure permissions
 echo -n "Configuring permissions..."
 	chown -R $USERNAME:$USERNAME $INSTALLDIR
-	chmod -R 640 $INSTALLDIR
+	chmod -R 700 $INSTALLDIR
+#	chmod 760 "$INSTALLSCRIPTDIR/$APPNAME.sh"
 echo "Done!"
