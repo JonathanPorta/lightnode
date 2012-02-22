@@ -93,7 +93,7 @@ echo "Done!"
 #Install scripts
 echo -n "Installing scripts..."
 	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR 2>/dev/null || :
-	echo "PATH=$PATH:$INSTALLDIR/nodejs/bin" >> "$INSTALLSCRIPTDIR/.bashrc"
+	echo "PATH=$PATH:$INSTALLDIR/bin" >> "$INSTALLSCRIPTDIR/.bashrc"
 	echo "YAYAY!"
 echo "Done!"
 
