@@ -21,6 +21,7 @@ ERRORLOG="$LOGDIR/error-$APPNAME"
 #General Development Tools
 echo "Installing Development Dependencies"
 	yum -y groupinstall 'Development Tools' 2>>$ERRORLOG
+	yum -y install git 2>>$ERRORLOG
 
 #Crosslight
 echo "Installing Crosslight Dependencies"

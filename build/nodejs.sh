@@ -86,13 +86,15 @@ echo "User and group configuration complete!"
 
 #Install config
 echo -n "Installing config..."
-	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
+	#We don't care if the copy fails, because it likely failed due to not having a configuration, which is actually ok.
+	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR 2>/dev/null || :
 echo "Done!"
 
 #Install scripts
 echo -n "Installing scripts..."
-	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR
-	echo "PATH=$PATH:/home/nodejs/bin" >> "$INSTALLSCRIPTDIR/.bashrc"
+	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR 2>/dev/null || :
+	echo "PATH=$PATH:$INSTALLDIR/nodejs/bin" >> "$INSTALLSCRIPTDIR/.bashrc"
+	echo "YAYAY!"
 echo "Done!"
 
 #Configure permissions

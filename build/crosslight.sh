@@ -106,7 +106,8 @@ echo "User and group configuration complete!"
 
 #Install config
 echo -n "Installing config..."
-	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
+	#We don't care if the copy fails, because it likely failed due to not having a configuration, which is actually ok.
+	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR 2>/dev/null || :
 	#Set Crosslights root dir, username and groupname
 	echo "rootdir=\"$INSTALLDIR\"" >> $INSTALLCONFIGDIR/etc/lighttpd.conf.local
 	echo "server.username=\"$USERNAME\"" >> $INSTALLCONFIGDIR/etc/lighttpd.conf.local
@@ -115,7 +116,7 @@ echo "Done!"
 
 #Install scripts
 echo -n "Installing scripts..."
-	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR
+	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR 2>/dev/null || :
 echo "Done!"
 
 #Configure permissions
