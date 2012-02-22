@@ -92,6 +92,7 @@ echo "Done!"
 #Install scripts
 echo -n "Installing scripts..."
 	cp -Rf $SRCSCRIPTDIR/* $INSTALLSCRIPTDIR
+	echo "PATH=$PATH:/home/nodejs/bin" >> "$INSTALLSCRIPTDIR/.bashrc"
 echo "Done!"
 
 #Configure permissions

@@ -1,2 +1,5 @@
-#Install/Build script will add root and user/group settings here.
+## 
+# Install/Build script will add root and user/group settings here
+#
+
 server.port = 80

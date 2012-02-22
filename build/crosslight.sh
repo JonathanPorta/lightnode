@@ -108,9 +108,9 @@ echo "User and group configuration complete!"
 echo -n "Installing config..."
 	cp -Rf $SRCCONFIGDIR/* $INSTALLCONFIGDIR
 	#Set Crosslights root dir, username and groupname
-	echo "rootdir=\"$INSTALLDIR\"" >> $INSTALLCONFIGDIR/lighttpd.conf.local
-	echo "server.username=\"$USERNAME\"" >> $INSTALLCONFIGDIR/lighttpd.conf.local
-	echo "server.groupname=\"$USERNAME\"" >> $INSTALLCONFIGDIR/lighttpd.conf.local
+	echo "rootdir=\"$INSTALLDIR\"" >> $INSTALLCONFIGDIR/etc/lighttpd.conf.local
+	echo "server.username=\"$USERNAME\"" >> $INSTALLCONFIGDIR/etc/lighttpd.conf.local
+	echo "server.groupname=\"$USERNAME\"" >> $INSTALLCONFIGDIR/etc/lighttpd.conf.local
 echo "Done!"
 
 #Install scripts
