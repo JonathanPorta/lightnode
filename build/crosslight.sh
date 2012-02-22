@@ -38,8 +38,8 @@ LOGSPACER="---------------------------------------------------------------------
 
 CONFIGPARAMS="--with-openssl --with-openssl-libs=/usr/lib --sbindir=$INSTALLDIR/bin/ --libdir=$INSTALLDIR/bin/lib/"
 
-#Write error logs and mkdir install directory.
-mkdir -p $INSTALLDIR "$INSTALLDIR/bin/lib" "$INSTALLDIR/etc" $INSTALLCONFIGDIR
+#Write error logs and make sure we have all of the directories we need
+mkdir -p $INSTALLDIR "$INSTALLDIR/bin/lib" $SRCCONFIGDIR $SRCSCRIPTDIR $INSTALLCONFIGDIR $INSTALLSCRIPTDIR
 touch $ERRORLOG $BUILDLOG
 
 echo -n "Downloading $APPNAME..."

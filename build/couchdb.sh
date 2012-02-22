@@ -31,8 +31,8 @@ INSTALLSCRIPTDIR="$INSTALLROOT/$APPNAME"
 
 LOGSPACER="---------------------------------------------------------------------------------------------------------------------"
 
-#Write error logs and mkdir install directory.
-mkdir -p $INSTALLDIR
+#Write error logs and make sure we have all of the directories we need
+mkdir -p $INSTALLDIR $SRCCONFIGDIR $SRCSCRIPTDIR $INSTALLCONFIGDIR $INSTALLSCRIPTDIR
 touch $ERRORLOG $BUILDLOG
 
 #Clone the repository
