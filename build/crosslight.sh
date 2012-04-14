@@ -84,7 +84,7 @@ echo -n "Cleaning up install..."
 	rm -rf $BIN/{lighttpd-angel,pear,peardev,pecl,phar,phar.phar,php,php-config,phpize} $SBIN "$INSTALLDIR/etc/pear.conf" >> $BUILDLOG 2>>$ERRORLOG
 
 	#Make sure we have our necessary var/ directories
-	mkdir -p $INSTALLDIR/var/tmp/upload $INSTALLDIR/var/tmp/compressed $INSTALLDIR/var/www $INSTALLDIR/var/log >> $BUILDLOG 2>>$ERRORLOG
+	mkdir -p $INSTALLDIR/var/tmp/upload $INSTALLDIR/var/tmp/compressed $INSTALLDIR/var/www $INSTALLDIR/var/log $INSTALLDIR/var/log/localhost >> $BUILDLOG 2>>$ERRORLOG
 echo "Done!"
 
 #Configure user and group permissions
