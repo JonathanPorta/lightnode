@@ -6,7 +6,7 @@
 APPNAME="couchdb"
 USERNAME="couchdb"
 REPO="http://git-wip-us.apache.org/repos/asf/couchdb.git"
-REPOTAG="1.1.1"
+REPOTAG="1.2.0"
 CONFIGPARAMS="--with-erlang=/usr/lib64/erlang/usr/include/"
 
 #Abort on Error
