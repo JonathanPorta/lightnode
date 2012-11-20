@@ -6,7 +6,7 @@
 APPNAME="nodejs"
 USERNAME="nodejs"
 REPO="https://github.com/joyent/node.git"
-REPOTAG="v0.6.11"
+REPOTAG="v0.8.14"
 CONFIGPARAMS=""
 
 #Abort on Error
