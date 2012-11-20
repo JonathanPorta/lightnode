@@ -7,13 +7,14 @@ ROOT=`pwd`
 BUILDSCRIPTS="$ROOT/build"
 TEMPDIR="$ROOT/temp"
 LOGDIR="$TEMPDIR/logs"
-INSTALLROOT="/home"
+INSTALLROOT=$1
 
 DEPS="$BUILDSCRIPTS/yum_dependencies.sh"
 CROSSLIGHT="$BUILDSCRIPTS/crosslight.sh"
 COUCH="$BUILDSCRIPTS/couchdb.sh"
 NODE="$BUILDSCRIPTS/nodejs.sh"
 
+echo "Going to install in $INSTALLROOT"
 
 #Need to be root
 if [[ $EUID -ne 0 ]]; then
@@ -37,10 +38,10 @@ echo "Installing Crosslight:"
 	$CROSSLIGHT $ROOT $INSTALLROOT
 echo "Crosslight installed."
 
-#Build CouchDB
-echo -n "Installing CouchDB..."
-	$COUCH $ROOT $INSTALLROOT
-echo "Done!"
+##Build CouchDB
+#echo -n "Installing CouchDB..."
+#	$COUCH $ROOT $INSTALLROOT
+#echo "Done!"
 
 #Build Node.js
 echo -n "Installing Node.js..."

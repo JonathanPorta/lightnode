@@ -87,22 +87,22 @@ echo -n "Cleaning up install..."
 	mkdir -p $INSTALLDIR/var/tmp/upload $INSTALLDIR/var/tmp/compressed $INSTALLDIR/var/www $INSTALLDIR/var/log $INSTALLDIR/var/log/localhost >> $BUILDLOG 2>>$ERRORLOG
 echo "Done!"
 
-#Configure user and group permissions
-echo "Configuring user and group."
-	#Make sure we have a groupls -l
-	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
-		echo -n "Creating group $USERNAME..."
-			groupadd $USERNAME
-		echo "Done!"
-	fi
+##Configure user and group permissions
+#echo "Configuring user and group."
+#	#Make sure we have a groupls -l
+#	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
+#		echo -n "Creating group $USERNAME..."
+#			groupadd $USERNAME
+#		echo "Done!"
+#	fi
 
-	#Make sure we have a user
-	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
-		echo -n "Creating user account $USERNAME..."
-			useradd -g $USERNAME --home $INSTALLDIR --shell /sbin/nologin $USERNAME
-		echo "Done!"
-	fi
-echo "User and group configuration complete!"
+#	#Make sure we have a user
+#	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
+#		echo -n "Creating user account $USERNAME..."
+#			useradd -g $USERNAME --home $INSTALLDIR --shell /sbin/nologin $USERNAME
+#		echo "Done!"
+#	fi
+#echo "User and group configuration complete!"
 
 #Install config
 echo -n "Installing config..."

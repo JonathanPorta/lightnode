@@ -67,22 +67,22 @@ echo -n "Installing $APPNAME..."
 	echo $LOGSPACER >> $ERRORLOG
 echo "Done!"
 
-#Configure user and group permissions
-echo "Configuring user and group."
-	#Make sure we have a groupls -l
-	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
-		echo -n "Creating group $USERNAME..."
-			groupadd $USERNAME
-		echo "Done!"
-	fi
+##Configure user and group permissions
+#echo "Configuring user and group."
+#	#Make sure we have a groupls -l
+#	if ! grep -c "^$USERNAME" /etc/group > /dev/null; then
+#		echo -n "Creating group $USERNAME..."
+#			groupadd $USERNAME
+#		echo "Done!"
+#	fi
 
-	#Make sure we have a user
-	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
-		echo -n "Creating user account $USERNAME..."
-			useradd -g $USERNAME --home $INSTALLDIR $USERNAME
-		echo "Done!"
-	fi
-echo "User and group configuration complete!"
+#	#Make sure we have a user
+#	if ! grep -c "^$USERNAME" /etc/passwd > /dev/null; then
+#		echo -n "Creating user account $USERNAME..."
+#			useradd -g $USERNAME --home $INSTALLDIR $USERNAME
+#		echo "Done!"
+#	fi
+#echo "User and group configuration complete!"
 
 #Install config
 echo -n "Installing config..."
